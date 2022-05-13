@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 @Data
 @Entity
 @Table(name="transcript")
-@NamedQuery(name="Transcript.findAll", query="SELECT s FROM Transcript t")
+@NamedQuery(name="Transcript.findAll", query="SELECT t FROM Transcript t")
 public class Transcript implements Serializable {
     private static final long serialVersionUID = 1L;
 
