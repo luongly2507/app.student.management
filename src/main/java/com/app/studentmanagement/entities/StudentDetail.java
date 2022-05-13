@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 @Data
 @Entity
 @Table(name="student_detail")
-@NamedQuery(name="StudentDetail.findAll", query="SELECT s FROM StudentDetail sd")
+@NamedQuery(name="StudentDetail.findAll", query="SELECT sd FROM StudentDetail sd")
 public class StudentDetail implements Serializable {
     private static final long serialVersionUID = 1L;
 
