@@ -2,8 +2,8 @@ package com.app.studentmanagement.entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import java.util.Date;
 import java.util.Set;
+
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -25,14 +25,21 @@ public class Transcript implements Serializable {
     @Column(unique=true, nullable=false)
     private int id;
 
-    @Column(nullable=true)
-    private String score_fifteen_minutes;
+    @Column(name="score_fifteen_minutes", precision=53)
+    private double scoreFifteenMinutes;
 
-    @Column(nullable=true)
-    private String score_one_period;
+    @Column(name="score_one_period", precision=53)
+    private double scoreOnePeriod;
+
+    //bi-directional many-to-one association to StudentDetail
+    @OneToMany(mappedBy="transcript")
+    private Set<StudentDetail> studentDetails;
 
     //bi-directional many-to-one association to Subject
-    @OneToMany(mappedBy="transcript")
-    private Set<int> subjectID;
+    @ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="subject_id")
+    private Subject subject;
+
+
 
 }

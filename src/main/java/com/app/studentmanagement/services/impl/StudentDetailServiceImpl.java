@@ -21,8 +21,8 @@ public class StudentDetailServiceImpl implements StudentDetailService{
     StudentRepository studentDetailRepository;
 
     @Override
-    public Page<Student> findAll(Pageable pageable) {
-        return studentRepository.findAll(pageable);
+    public Page<StudentDetail> findAll(Pageable pageable) {
+        return studentDetailRepository.findAll(pageable);
     }
 
     @Override

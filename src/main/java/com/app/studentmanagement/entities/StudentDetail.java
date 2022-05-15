@@ -1,9 +1,9 @@
+
 package com.app.studentmanagement.entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import java.util.Date;
-import java.util.Set;
+
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 @Data
 @Entity
 @Table(name="student_detail")
-@NamedQuery(name="StudentDetail.findAll", query="SELECT sd FROM StudentDetail sd")
+@NamedQuery(name="StudentDetail.findAll", query="SELECT s FROM StudentDetail s")
 public class StudentDetail implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -25,17 +25,23 @@ public class StudentDetail implements Serializable {
     @Column(unique=true, nullable=false)
     private int id;
 
-    @Column(unique=true, nullable=false)
-    private int studentID;
+    @Column(precision=53)
+    private double gpa;
 
     //bi-directional many-to-one association to Semester
-    @OneToMany(mappedBy="student_detail")
-    private Set<int> semesterID;
+    @ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="semester_id")
+    private Semester semester;
+
+    //bi-directional many-to-one association to Student
+    @ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="student_id")
+    private Student student;
 
     //bi-directional many-to-one association to Transcript
-    @OneToMany(mappedBy="student_detail")
-    private Set<int> transcriptID;
+    @ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="transcript_id")
+    private Transcript transcript;
 
-    @Column (nullable=false)
-    private double gpa;
+
 }
