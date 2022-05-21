@@ -18,7 +18,11 @@ import lombok.NoArgsConstructor;
 @NamedQuery(name="Parameter.findAll", query="SELECT p FROM Parameter p")
 public class Parameter implements Serializable {
 	private static final long serialVersionUID = 1L;
-
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(unique=true, nullable=false)
+	private int id;
+	
 	@Column(length=50)
 	private String name;
 

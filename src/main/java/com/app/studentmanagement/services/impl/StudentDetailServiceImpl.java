@@ -18,7 +18,7 @@ import org.springframework.stereotype.Service;
 public class StudentDetailServiceImpl implements StudentDetailService{
 
     @Autowired
-    StudentRepository studentDetailRepository;
+    StudentDetailRepository studentDetailRepository;
 
     @Override
     public Page<StudentDetail> findAll(Pageable pageable) {

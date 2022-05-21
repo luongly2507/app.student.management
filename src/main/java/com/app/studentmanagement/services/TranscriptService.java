@@ -10,7 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-public interface StudentService {
+public interface TranscriptService{
     public Page<Transcript> findAll(Pageable pageable);
     public List<Transcript> findAll();
     public Transcript findById(int id);

@@ -43,7 +43,7 @@ public class TranscriptServiceImpl implements TranscriptService{
 
     @Override
     public Transcript save(Transcript transcript) {
-        return transcript.save(transcript);
+        return transcriptRepository.save(transcript);
     }
 
 }
