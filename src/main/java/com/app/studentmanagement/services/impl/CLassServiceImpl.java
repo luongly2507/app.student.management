@@ -42,8 +42,8 @@ public class ClassServiceImpl implements ClassService{
     }
 
     @Override
-    public Class save(Class _class) {
-        return ClassRepository.save(_class);
+    public Class save(Class clazz) {
+        return ClassRepository.save(clazz);
     }
 
 }
