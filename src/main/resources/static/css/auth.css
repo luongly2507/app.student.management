@@ -615,3 +615,11 @@ form.sign-in-form {
   .lte8 .passtrengthMeter:hover .tooltip {
     display: block;
   }
+  .error{
+    font-style: italic;
+    color: crimson;
+  }
+  .success{
+    font-style: italic;
+    color: green;
+  }

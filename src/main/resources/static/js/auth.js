@@ -15,4 +15,14 @@ $(document).ready(function($) {
     passwordToggle: true,
     tooltip: true
   });
+  $('#confirm-password-signup').keyup(function(){
+    if ($('#confirm-password-signup').val() != $('#password-signup').val()) {
+      $('#confirm-password-error-message').text('Authentication password is incorrect');
+      $('#btn-signup').prop('disabled', true);
+    }
+    else{
+      $('#confirm-password-error-message').text('');
+      $('#btn-signup').prop('disabled', false);
+    }
+  });
 });

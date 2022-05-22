@@ -15,11 +15,14 @@
     <div class="container">
         <div class="forms-container">
             <div class="signin-signup">
-                <form method="post" class="sign-in-form">
+                <form th:action="@{/auth}" method="post" class="sign-in-form">
                     <h2 class="title">Sign in</h2>
+                    <span class="error" th:text ="${loginErrorMessage}"></span>
+                    <span class="error" th:text ="${registerEmailExist}"></span>
+                    <span class="success" th:text ="${registerSuccess}"></span>
                     <div class="input-field">
                         <i class="fas fa-envelope"></i>
-                        <input type="username" id="email" name="email" required placeholder="Email" />
+                        <input id="email" name="email" required placeholder="Email" />
                     </div>
                     <div class="input-field">
                         <i class="fas fa-lock"></i>
@@ -27,32 +30,30 @@
                     </div>
                     <input type="submit" value="Login" class="btn solid" />
                 </form>
-                <form action="#" id="sign-up-form" method="post" class="sign-up-form">
+                <form th:action="@{/sign-up}" id="sign-up-form" th:object="${userSignupRequest}" method="post" class="sign-up-form">
                     <h2 class="title">Sign up</h2>
                     <p id="signUpNotification"></p>
                     <div class="input-field">
                         <i class="fas fa-user"></i>
-                        <input type="text" id="full-name" placeholder="Full name" />
+                        <input type="text" id="full-name" th:field="*{fullName}" placeholder="Full name" required/>
                     </div>
                     <div class="input-field">
                         <i class="fas fa-envelope"></i>
-                        <input type="email" id="email-signup" placeholder="Email" />
+                        <input type="email" id="email-signup" th:field ="*{email}" placeholder="Email" required />
                     </div>
                     <div id="email-validation">
                         <span style="color: red; font-style: italic; font-size:smaller;"></span>
                     </div>
                     <div class="input-field">
                         <i class="fas fa-lock"></i>
-                        <input id="password-signup" type="password" placeholder="Password" />
+                        <input id="password-signup" type="password" th:field="*{password}" placeholder="Password" required/>
                     </div>
                     <div class="input-field">
                         <i class="fas fa-lock"></i>
-                        <input id="confirm-password-signup" type="password" placeholder="Confirm Password" />
+                        <input id="confirm-password-signup" type="password" placeholder="Confirm Password" required/>
                     </div>
-                    <input type="submit" class="btn" id="btn-signup" value="Sign up" />
-
-
-
+                    <span class="error" id="confirm-password-error-message"></span>
+                    <button type="submit" class="btn" id="btn-signup">Sign Up</button>
                 </form>
             </div>
         </div>
