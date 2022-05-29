@@ -2,19 +2,15 @@ package com.app.studentmanagement.services;
 
 import java.util.List;
 
-import javax.transaction.Transactional;
-
 import com.app.studentmanagement.entities.Grade;
-
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Service;
+import com.app.studentmanagement.payload.request.UpdateGradeRequest;
+import com.app.studentmanagement.payload.response.GradeResponse;
 
 public interface GradeService {
-    public Page<Grade> findAll(Pageable pageable);
-    public List<Grade> findAll();
-    public Grade findById(int id);
+    public List<GradeResponse> findAll();
+    public GradeResponse findById(int id);
     public void deleteById(int id);
-    public Grade save(Grade grade);
+    public GradeResponse save(Grade grade);
+    public GradeResponse save(int id, UpdateGradeRequest gradeRequest);
 }
 

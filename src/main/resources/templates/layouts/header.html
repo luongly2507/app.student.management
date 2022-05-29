@@ -1,0 +1,58 @@
+<header class="container ">
+    <ul class="nav nav-pills  nav-fill m-0 p-1 small bg-white border rounded-5 shadow-sm" id="pills-tab"
+        role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link rounded-5" id="ali-tab" data-bs-toggle="pill" data-bs-target="#ali"
+                type="button" role="tab" aria-controls="ali" aria-selected="true"><img th:src="@{/img/ali-icon.png}"
+                    width="25px" alt=""></button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link rounded-5 " id="semester-tab" data-bs-toggle="pill"
+                data-bs-target="#semester" type="button" role="tab" aria-controls="semester"
+                aria-selected="true">Học kỳ</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link rounded-5" id="grade-tab" data-bs-toggle="pill"
+                data-bs-target="#grade" type="button" role="tab" aria-controls="grade"
+                aria-selected="true">Khối</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link rounded-5" id="class-tab" data-bs-toggle="pill"
+                data-bs-target="#class" type="button" role="tab" aria-controls="class"
+                aria-selected="true">Lớp</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link rounded-5" id="student-tab" data-bs-toggle="pill"
+                data-bs-target="#student" type="button" role="tab" aria-controls="student"
+                aria-selected="false">Học sinh</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link rounded-5" id="course-tab" data-bs-toggle="pill"
+                data-bs-target="#course" type="button" role="tab" aria-controls="course"
+                aria-selected="false">Môn học</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link rounded-5" id="score-board-tab" data-bs-toggle="pill"
+                data-bs-target="#score-board" type="button" role="tab" aria-controls="score-board"
+                aria-selected="false">Bảng điểm</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link rounded-5" id="regulations-tab" data-bs-toggle="pill"
+                data-bs-target="#regulations" type="button" role="tab" aria-controls="regulations"
+                aria-selected="false">Quy định</button>
+        </li>
+
+        <li class="nav-item dropdown" role="presentation">
+            <button class="nav-link rounded-5" id="username-tab" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fa-solid fa-user-large border p-1 rounded-5 text-primary"></i>
+            </button>
+           
+            <ul class="dropdown-menu">
+                <li class="dropdown-item" th:text="'Xin chào ' + ${#authentication.getPrincipal().fullName}" ></li>
+                <input type="hidden" th:value="${#authentication.getPrincipal().getAuthorities()}" id="role" />
+                <hr>
+                <li><a class="dropdown-item" th:href="@{/logout}">Đăng xuất</a></li>
+              </ul>
+        </li>
+    </ul>
+</header>

@@ -1,0 +1,127 @@
+<div class="tab-pane fade" id="semester" role="tabpanel" aria-labelledby="semester-tab" tabindex="0">
+    <div class="bg-light rounded-5 mt-3 p-3">
+        <div class="d-flex justify-content-between">
+            <button class="btn btn-primary rounded-5" sec:authorize="hasRole('ROLE_PRINCIPAL')" data-bs-toggle="modal" data-bs-target="#add-semeter-modal">Thêm học kỳ</button>
+            <form class="d-flex" role="search">
+                <input class="form-control me-2 rounded-5" id="search-semesters" type="search"  placeholder="Năm học ..." aria-label="Search">
+            </form>
+        </div>
+    </div>
+
+    <div class="bg-light rounded-5 mt-3 p-5">
+        <table class="table table-hover text-center">
+            <thead class="table-primary">
+                <tr>
+                    <th>#</th>
+                    <th>Tên học kỳ</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody id="semesters-list">
+                <tr  th:each="semester: ${semesters}">
+                    <td th:utext="${semester.id}"></td>
+                    <td th:utext="${semester.name} + ' năm học ' + ${semester.dateStart.getYear()} +'-' + ${semester.dateStart.getYear()+1}"></td>
+                    <td class="dropdown">
+                        <a role="button"  data-bs-toggle="dropdown" aria-expanded="false"><i
+                                class="fa-solid fa-ellipsis-vertical"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#view-semeter-modal" th:attr="onclick=${'viewSemester('+ semester.id + ')'}">Xem chi tiết</a></li>
+                            <li><a class="dropdown-item" href="#" sec:authorize="hasRole('ROLE_PRINCIPAL')" data-bs-toggle="modal" data-bs-target="#update-semeter-modal" th:attr="onclick=${'updateSemester('+ semester.id + ')'}">Chỉnh sửa</a></li>
+                            <li><a class="dropdown-item" href="#" sec:authorize="hasRole('ROLE_PRINCIPAL')" data-bs-toggle="modal" data-bs-target="#delete-semeter-modal" th:attr="onclick=${'deleteSemester('+ semester.id + ')'}">Xóa</a></li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+  
+  <!-- Modal -->
+  <!-- Add Semester-->
+  <form th:action="@{/semesters}" th:method="post" th:object="${semester}">
+  <div class="modal fade" id="add-semeter-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Thêm học kỳ</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+              <label class="form-label" for="">Tên học kỳ: </label>
+              <input type="text"  class="form-control" th:field="*{name}" required>
+              <label class="form-label" for="">Ngày bắt đầu: </label>
+              <input type="date"  class="form-control"  th:field="*{dateStart}" required>
+              <label class="form-label" for=""  >Ngày kết thúc: </label>
+              <input type="date" class="form-control" th:field="*{dateEnd}" required>     
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+          <button type="submit"  class="btn btn-primary">
+            Thêm
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+  <!-- Update Semester-->
+  <form id="update-semester-form">
+    <div class="modal fade" id="update-semeter-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Cập nhật học kì</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+                <label class="form-label" for="">Tên học kỳ: </label>
+                <input type="text" id="update-semester-name" class="form-control"  required>
+                <label class="form-label" for="">Ngày bắt đầu: </label>
+                <input type="date" id="update-semester-date-start" class="form-control"  required>
+                <label class="form-label" for=""  >Ngày kết thúc: </label>
+                <input type="date" id="update-semester-date-end"  class="form-control" required>     
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+            <button type="submit" id="update-semester-button" class="btn btn-primary">Cập nhật</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+
+   <!-- Delete Semester-->
+   <form id="delete-semester-form">
+    <div class="modal fade" id="delete-semeter-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Xác nhận xóa học kì</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p id="delete-semester-question"></p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+            <button type="submit" id="delete-semester-button" class="btn btn-danger">Xóa</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+   <!-- View Semester-->
+    <div class="modal fade" id="view-semeter-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-xl ">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="view-semester-title"></h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body" id="view-semester-content">
+            
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
