@@ -5,12 +5,13 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import com.app.studentmanagement.entities.Grade;
+import com.app.studentmanagement.mapper.GradeMapper;
+import com.app.studentmanagement.payload.request.UpdateGradeRequest;
+import com.app.studentmanagement.payload.response.GradeResponse;
 import com.app.studentmanagement.repositories.GradeRepository;
 import com.app.studentmanagement.services.GradeService;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -20,19 +21,17 @@ public class GradeServiceImpl implements GradeService{
     @Autowired
     GradeRepository gradeRepository;
 
+    @Autowired
+    GradeMapper gradeMapper;
+
     @Override
-    public Page<Grade> findAll(Pageable pageable) {
-        return gradeRepository.findAll(pageable);
+    public List<GradeResponse> findAll() {
+        return gradeRepository.findAll().stream().map(grade -> gradeMapper.toGradeResponse(grade)).toList();
     }
 
     @Override
-    public List<Grade> findAll() {
-        return gradeRepository.findAll();
-    }
-
-    @Override
-    public Grade findById(int id) {
-        return gradeRepository.findById(id).get();
+    public GradeResponse findById(int id) {
+        return gradeMapper.toGradeResponse(gradeRepository.findById(id).get());
     }
 
     @Override
@@ -42,8 +41,15 @@ public class GradeServiceImpl implements GradeService{
     }
 
     @Override
-    public Grade save(Grade grade) {
-        return gradeRepository.save(grade);
+    public GradeResponse save(Grade grade) {
+        return gradeMapper.toGradeResponse(gradeRepository.save(grade));
     }
+
+    @Override
+    public GradeResponse save(int id, UpdateGradeRequest gradeRequest) {
+        return gradeMapper.toGradeResponse(gradeMapper.toGrade(id, gradeRequest));
+    }
+
+   
     
 }

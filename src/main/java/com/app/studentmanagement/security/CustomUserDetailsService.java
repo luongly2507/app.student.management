@@ -33,7 +33,7 @@ public class CustomUserDetailsService implements UserDetailsService{
             throw new UsernameNotFoundException(username);
         }
         User user = optionalUser.get();
-        return new User(username, user.getPassword(), getAuthorities(user.getRoles()));
+        return new User(username, user.getPassword(), getAuthorities(user.getRoles()),user.getFullName());
     }
 
     private List<GrantedAuthority> getAuthorities(List<Role> roles) {

@@ -1,10 +1,19 @@
 package com.app.studentmanagement.entities;
 
 import java.io.Serializable;
-import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.Set;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -26,15 +35,15 @@ public class Semester implements Serializable {
 	@Column(unique=true, nullable=false)
 	private int id;
 
-	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="date_end", nullable=false)
-	private Date dateEnd;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private LocalDate dateEnd;
 
-	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="date_start", nullable=false)
-	private Date dateStart;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private LocalDate dateStart;
 
-	@Column(nullable=false)
+	@Column(nullable=false, columnDefinition = "NVARCHAR(255)")
 	private String name;
 
 	//bi-directional many-to-one association to StudentDetail

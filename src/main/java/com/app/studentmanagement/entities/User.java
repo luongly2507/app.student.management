@@ -39,7 +39,7 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
      
-    @Column(nullable = false, unique = true, length = 45)
+    @Column(nullable = false, unique = true, length = 150, columnDefinition = "NVARCHAR(150)")
     @NotEmpty(message = "User's email cannot be empty.")
     private String email;
      
@@ -47,9 +47,9 @@ public class User implements UserDetails {
     @NotEmpty(message = "User's password cannot be empty.")
     private String password;
      
-    @Column(nullable = false, length = 250)
+    @Column(nullable = false, length = 150, columnDefinition = "NVARCHAR(150)")
     @NotEmpty(message = "User's name cannot be empty.")
-    @Size(min = 5, max = 250)
+    @Size(min = 3, max = 150)
     private String fullName;
 
     @Transient
@@ -64,11 +64,11 @@ public class User implements UserDetails {
     )
     private List<Role> roles;
  
-    public User(String email, String password, List<GrantedAuthority> authorities){
+    public User(String email, String password, List<GrantedAuthority> authorities, String fullName){
         this.email = email;
         this.password = password;
         this.authorities = authorities;
-
+        this.fullName = fullName;
     }
 
     public void addRole(Role role) {
