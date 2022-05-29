@@ -28,7 +28,7 @@ public class Grade implements Serializable {
 	private String name;
 
 	//bi-directional many-to-one association to Class
-	@OneToMany(mappedBy="grade")
+	@OneToMany(mappedBy="grade",cascade = CascadeType.ALL)
 	private Set<Class> clazzs;
 
 }

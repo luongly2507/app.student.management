@@ -1,0 +1,109 @@
+<div class="tab-pane fade" id="grade" role="tabpanel" aria-labelledby="grade-tab" tabindex="0">
+    <div class="bg-light rounded-5 mt-3 p-3" sec:authorize="hasRole('ROLE_PRINCIPAL')">
+        <div class="d-flex justify-content-between">
+            <button class="btn btn-primary rounded-5" data-bs-toggle="modal" data-bs-target="#add-grade-modal">Thêm
+                Khối</button>
+        </div>
+    </div>
+
+    <div class="bg-light rounded-5 mt-3 p-5">
+        <table class="table table-hover text-center">
+            <thead class="table-primary">
+                <tr>
+                    <th>#</th>
+                    <th>Tên khối</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody id="grades-list">
+                <tr th:each="grade: ${grades}">
+                    <td th:utext="${grade.id}"></td>
+                    <td th:utext="'Khối '+${grade.name}"></td>
+                    <td class="dropdown" >
+                        <a role="button" data-bs-toggle="dropdown"  sec:authorize="hasRole('ROLE_PRINCIPAL')" aria-expanded="false"><i
+                                class="fa-solid fa-ellipsis-vertical"></i></a>
+                        <ul class="dropdown-menu" >
+                            <li><a class="dropdown-item" href="#"
+                                    data-bs-toggle="modal" data-bs-target="#update-grade-modal"
+                                    th:attr="onclick=${'updateGrade('+ grade.id + ')'}">Chỉnh sửa</a></li>
+                            <li><a class="dropdown-item" href="#" 
+                                    data-bs-toggle="modal" data-bs-target="#delete-grade-modal"
+                                    th:attr="onclick=${'deleteGrade('+ grade.id + ')'}">Xóa</a></li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+    <!-- Modal -->
+    <!-- Add grade-->
+    <form th:action="@{/grades}" th:method="post" th:object="${grade}">
+        <div class="modal fade" id="add-grade-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Thêm khối</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <label class="form-label" for="">Tên khối: </label>
+                        <input type="text" class="form-control" th:field="*{name}" required>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                        <button type="submit" class="btn btn-primary">
+                            Thêm
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <!-- Update grade-->
+    <form id="update-grade-form">
+        <div class="modal fade" id="update-grade-modal" data-bs-backdrop="static" data-bs-keyboard="false"
+            tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Cập nhật Khối</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <label class="form-label" for="">Tên Khối: </label>
+                        <input type="text" id="update-grade-name" class="form-control" required>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                        <button type="submit" id="update-grade-button" class="btn btn-primary">Cập nhật</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <!-- Delete grade-->
+    <form id="delete-grade-form">
+        <div class="modal fade" id="delete-grade-modal" data-bs-backdrop="static" data-bs-keyboard="false"
+            tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Xác nhận xóa khối</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p id="delete-grade-question"></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                        <button type="submit" id="delete-grade-button" class="btn btn-danger">Xóa</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
