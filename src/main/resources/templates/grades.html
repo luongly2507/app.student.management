@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head th:replace="layouts/head.html :: head(${title})"></head>
+
+<body class="hold-transition sidebar-mini layout-fixed">
+	<div class="wrapper">
+		<!-- Navbar -->
+		<nav th:replace="layouts/nav.html"></nav>
+		<!-- Main Sidebar Container -->
+		<aside th:replace="layouts/aside.html"></aside>
+		<!-- Content Wrapper. Contains page content -->
+		<div class="content-wrapper">
+			<div th:replace="layouts/content-header.html :: header('Quản lý khối')"></div>
+			<!-- Main content -->
+			<section class="content">
+				<div class="container-fluid">
+					<div class="card">
+						<div class="card-header">
+							<h3 class="card-title">
+								<i class="fas fa-chart-pie mr-1"></i>
+								Danh sách khối
+							</h3>
+						</div>
+						<div class="card-body">
+							<div th:replace="custom_views/grades-content.html"></div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</div>
+	</div>
+	<footer th:replace="layouts/footer.html"></footer>
+	<script th:replace="layouts/script.html"></script>
+	<script th:src="@{/js/api/config.js}"></script>
+	<script th:src="@{/js/api/grades.js}"></script>
+</body>
+
+</html>

@@ -1,0 +1,78 @@
+<!-- Main Sidebar Container -->
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+    <a href="index3.html" class="brand-link">
+        <img th:src="@{/img/ali-icon.png}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+            style="opacity: .8">
+        <span class="brand-text font-weight-light">Admin</span>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <!-- Sidebar user panel (optional) -->
+        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+            <div class="info">
+                <a href="#" class="d-block" th:text="'Xin chào ' + ${#authentication.getPrincipal().fullName}" >Admin Name</a>
+            </div>
+        </div>
+        <!-- Sidebar Menu -->
+        <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                <!-- Add icons to the links using the .nav-icon class
+             with font-awesome or any other icon font library -->
+             
+                <li class="nav-item" sec:authorize="hasRole('ROLE_PRINCIPAL')">
+                    <a th:href="@{/semesters}" class="nav-link">
+                        <i class="nav-icon fas fa-bars text-secondary"></i>
+                        <p class="text">Quản lý học kì</p>
+                    </a>
+                </li>
+                <li class="nav-item" sec:authorize="hasRole('ROLE_PRINCIPAL')">
+                    <a th:href="@{/grades}" class="nav-link">
+                        <i class="nav-icon fas fa-border-all text-success"></i>
+                        <p>Quản lý khối</p>
+                    </a>
+                </li>
+                <li class="nav-item" sec:authorize="hasRole('ROLE_PRINCIPAL')">
+                    <a th:href="@{/classes}" class="nav-link">
+                        <i class="nav-icon  fas fa-address-card text-danger"></i>
+                        <p>Quản lý lớp</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a th:href="@{/students}" class="nav-link">
+                        <i class="nav-icon far fa-user text-warning"></i>
+                        <p>Quản lý học sinh</p>
+                    </a>
+                </li>
+                <li class="nav-item" sec:authorize="hasRole('ROLE_PRINCIPAL')">
+                    <a th:href="@{/subjects}" class="nav-link">
+                        <i class="nav-icon fas fa-atlas text-info"></i>
+                        <p>Quản lý môn học</p>
+                    </a>
+                </li>
+                <li class="nav-item" sec:authorize="hasRole('ROLE_PRINCIPAL')">
+                    <a th:href="@{/scores}" class="nav-link">
+                        <i class="nav-icon fas fa-atlas text-info"></i>
+                        <p>Quản lý điểm</p>
+                    </a>
+                </li>
+                <li class="nav-item" sec:authorize="hasRole('ROLE_PRINCIPAL')">
+                    <a th:href="@{/regulations}" class="nav-link">
+                        <i class="nav-icon far fa-circle text-info"></i>
+                        <p>Thay đổi quy định</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a th:href="@{/logout}" class="nav-link">
+                        <i class="nav-icon far fa-circle text-light"></i>
+                        <p>Đăng xuất</p>
+                    </a>
+                </li>
+                
+            </ul>
+        </nav>
+        <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+</aside>

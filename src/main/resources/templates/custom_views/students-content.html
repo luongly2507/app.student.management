@@ -1,0 +1,178 @@
+<div>
+    <div class="row">
+        <div class="col-3">
+            <select class="form-control" name="" id="semester-list">
+                
+            </select>
+            
+        </div>
+        <div class="col-3">
+            <select class="form-control" name="" id="class-list">
+                
+            </select>
+            
+        </div>
+        
+    </div>
+    
+    <button class="btn btn-primary mt-3" data-toggle="modal" data-target="#add-modal">Thêm học sinh</button>
+   
+    <table class="table">
+        <thead>
+            <tr>
+                <th class="col-1">#</th>
+                <th class="col-2">Tên học sinh</th>
+                <th class="col-2">Email</th>
+                <th class="col-1">Giới tính</th>
+                <th class="col-1">Ngày sinh</th>
+                <th class="col-2">Địa chỉ</th>
+                <th class="col-3"></th>
+            </tr>   
+        </thead>
+        <tbody id="student-content">
+
+        </tbody>
+
+    </table>
+    <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-end">
+            <li class="page-item disabled" id="pre-page">
+                <a class="page-link">Previous</a>
+            </li>
+            <li class="page-item " id="next-page">
+                <a class="page-link" href="#">Next</a>
+            </li>
+        </ul>
+    </nav>
+</div>
+<!--Add modal-->
+<form method="POST" id="add-modal-form">
+    <div class="modal fade" id="add-modal" data-backdrop="static" data-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Thêm học sinh</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p class="text-danger" id="add-message-error"></p>
+                    <label for="">Tên học kì</label>
+                    <select name="" class="form-control" id="add-semester">
+                        
+                    </select>
+                    <label for="">Tên lớp</label>
+                    <select name="" class="form-control" id="add-class">
+                        
+                    </select>
+                    <label for="">Tên học sinh</label>
+                    <input class="form-control" type="text" id="add-name" required>
+                    <label for="">Email</label>
+                    <input class="form-control" type="email" id="add-email" required>
+                    <label for="">Giới tính</label>
+                    <select name="" class="form-control" id="add-gender">
+                        <option value="Nam">Nam</option>
+                        <option value="Nữ">Nữ</option>
+                    </select>
+                    <label for="">Địa chỉ</label>
+                    <input class="form-control" type="text" id="add-address" required>
+                    <label for="">Ngày sinh</label>
+                    <input class="form-control" type="date" id="add-birthday" required>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                    <button type="submit" class="btn btn-primary">Thêm</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<!--Update modal-->
+<form id="update-modal-form">
+    <div class="modal fade" id="update-modal" data-backdrop="static" data-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Cập nhật học sinh</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p class="text-danger" id="update-message-error"></p>
+                    <label for="">Tên học kì</label>
+                    <select name="" class="form-control" id="update-semester">
+                        
+                    </select>
+                    <label for="">Tên lớp</label>
+                    <select name="" class="form-control" id="update-class">
+                        
+                    </select>
+                    <label for="">Tên học sinh</label>
+                    <input class="form-control" type="text" id="update-name" required>
+                    <label for="">Email</label>
+                    <input class="form-control" type="email" id="update-email" required>
+                    <label for="">Giới tính</label>
+                    <select name="" class="form-control" id="update-gender">
+                        <option value="Nam">Nam</option>
+                        <option value="Nữ">Nữ</option>
+                    </select>
+                    <label for="">Địa chỉ</label>
+                    <input class="form-control" type="text" id="update-address" required>
+                    <label for="">Ngày sinh</label>
+                    <input class="form-control" type="date" id="update-birthday" required>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                    <button type="submit" class="btn btn-info" id="update-student">Cập nhật</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<!--Delete modal-->
+<form id="delete-modal-form">
+    <div class="modal fade" id="delete-modal" data-backdrop="static" data-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Xóa học sinh</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p  id="delete-message"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                    <button type="submit" class="btn btn-danger" id="delete-student">Xóa </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<!-- NOTIFICATION -->
+<div class="modal fade" id="notification-modal"  data-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Thông báo từ Ali</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h4  id="notification-message"></h4>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" data-dismiss="modal">OK </button>
+            </div>
+        </div>
+    </div>
+</div>
